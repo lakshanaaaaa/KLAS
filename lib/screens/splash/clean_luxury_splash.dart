@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CleanLuxurySplash extends StatefulWidget {
   const CleanLuxurySplash({super.key});
@@ -141,22 +142,28 @@ class _CleanLuxurySplashState extends State<CleanLuxurySplash>
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _buildKLASText(),
+        _buildLogo(),
         const SizedBox(height: 20),
         _buildTagline(),
       ],
     );
   }
 
-  Widget _buildKLASText() {
-    return const Text(
-      'KLAS',
-      style: TextStyle(
-        fontSize: 80,
-        fontWeight: FontWeight.w200,
-        color: Colors.white,
-        letterSpacing: 12.0,
-        height: 1.0,
+  Widget _buildLogo() {
+    return Container(
+      width: 400,
+      height: 150,
+      child: Image.asset(
+        'assets/images/KLAS__1_.-removebg-preview.png',
+        fit: BoxFit.contain,
+        errorBuilder: (context, error, stackTrace) {
+          print('Image error: $error');
+          return const Icon(
+            Icons.diamond_outlined,
+            size: 100,
+            color: Colors.white,
+          );
+        },
       ),
     );
   }
@@ -167,14 +174,12 @@ class _CleanLuxurySplashState extends State<CleanLuxurySplash>
       builder: (context, child) {
         return FadeTransition(
           opacity: _taglineAnimation,
-          child: const Text(
+          child: Text(
             'Elegant Finds',
-            style: TextStyle(
+            style: GoogleFonts.playfairDisplay(
               fontSize: 24,
-              fontWeight: FontWeight.w300,
-              color: Colors.white70,
-              letterSpacing: 3.0,
-              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF2E2E2E),
             ),
           ),
         );
