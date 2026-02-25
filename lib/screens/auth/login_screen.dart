@@ -57,20 +57,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Sign in to your KLAS account',
-                    style: TextStyle(
-                      fontSize: 18,
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color: const Color(0xFF808000),
-                      letterSpacing: 0.2,
+                      color: const Color(0xFF6B7280),
                       height: 1.4,
                     ),
                   ),
                   const SizedBox(height: 30),
 
                   // Glass Container for Login Form
-                  Container(
+                  Center(
+                    child: Container(
+                      width: 400,
+                      height: 500,
+                      constraints: const BoxConstraints(
+                        minWidth: 350,
+                        maxWidth: 500,
+                        minHeight: 450,
+                        maxHeight: 600,
+                      ),
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
                       color: const Color(0xFFE8D5C4).withOpacity(0.25),
@@ -183,6 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         _buildForgotPasswordLink(),
                       ],
                     ),
+                  ),
                   ),
                   const SizedBox(height: 30),
                   _buildSocialLoginSection(),

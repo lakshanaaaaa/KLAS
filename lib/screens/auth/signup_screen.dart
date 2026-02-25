@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -56,7 +57,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20),
                   Text(
                     'Create Account',
                     style: GoogleFonts.playfairDisplay(
@@ -66,9 +67,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Create your account to start shopping',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 16,
                       color: Colors.white70,
                     ),
@@ -76,7 +77,16 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 30),
 
                   // Glass Container for Signup Form
-                  Container(
+                  Center(
+                    child: Container(
+                      width: 400,
+                      height: 550,
+                      constraints: const BoxConstraints(
+                        minWidth: 350,
+                        maxWidth: 500,
+                        minHeight: 500,
+                        maxHeight: 650,
+                      ),
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
                       color: const Color(0xFFE8D5C4).withOpacity(0.25),
@@ -118,6 +128,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         _buildSignupButton(),
                       ],
                     ),
+                  ),
                   ),
                   const SizedBox(height: 20),
                   _buildSocialLoginSection(),
@@ -569,9 +580,17 @@ class _SignupScreenState extends State<SignupScreen> {
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: () {
+          onTap: () async {
             if (_formKey.currentState!.validate() && _agreeToTerms) {
-              // TODO: Implement signup logic
+              // Save user data to SharedPreferences
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setString('user_name', _nameController.text);
+              await prefs.setString('user_email', _emailController.text);
+              await prefs.setString('user_phone', '$_selectedCountryCode ${_phoneController.text}');
+              await prefs.setString('user_birth_date', _birthDateController.text);
+              await prefs.setString('user_address', _addressController.text);
+              await prefs.setBool('is_logged_in', true);
+              
               Navigator.pushReplacementNamed(context, '/women_home');
             }
           },

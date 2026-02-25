@@ -82,7 +82,7 @@ class _CleanLuxurySplashState extends State<CleanLuxurySplash>
     await Future.delayed(const Duration(seconds: 3));
     
     if (mounted) {
-      Navigator.pushReplacementNamed(context, '/women_home');
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 
@@ -99,14 +99,14 @@ class _CleanLuxurySplashState extends State<CleanLuxurySplash>
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: Color(0xFF7A8F64),
-        systemNavigationBarIconBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Color(0xFFF9F2E8),
+        systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFF7A8F64),
+      backgroundColor: const Color(0xFFF9F2E8),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -115,8 +115,8 @@ class _CleanLuxurySplashState extends State<CleanLuxurySplash>
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF7A8F64),
-              Color(0xFF6B8055),
+              Color(0xFFF9F2E8),
+              Color(0xFFF0E4D0),
             ],
           ),
         ),
@@ -154,14 +154,14 @@ class _CleanLuxurySplashState extends State<CleanLuxurySplash>
       width: 400,
       height: 150,
       child: Image.asset(
-        'assets/images/KLAS__1_.-removebg-preview.png',
+        'assets/images/3-removebg-preview.png',
         fit: BoxFit.contain,
         errorBuilder: (context, error, stackTrace) {
           print('Image error: $error');
           return const Icon(
             Icons.diamond_outlined,
             size: 100,
-            color: Colors.white,
+            color: Color(0xFF4B2E2B),
           );
         },
       ),
@@ -179,7 +179,7 @@ class _CleanLuxurySplashState extends State<CleanLuxurySplash>
             style: GoogleFonts.playfairDisplay(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF2E2E2E),
+              color: const Color(0xFF4B2E2B),
             ),
           ),
         );
