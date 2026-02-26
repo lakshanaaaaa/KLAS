@@ -4,11 +4,12 @@ import 'constants/app_colors.dart';
 import 'screens/splash/clean_luxury_splash.dart';
 import 'screens/home/klas_home_screen.dart';
 import 'screens/profile/klas_profile_screen.dart';
-import 'screens/wishlist/klas_wishlist_screen_new.dart';
+import 'screens/wishlist/klas_wishlist_screen.dart';
 import 'screens/orders/klas_orders_screen.dart';
 import 'screens/cart/klas_cart_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup_screen.dart';
+import 'screens/auth/signup_form_screen.dart';
 
 void main() {
   runApp(const KlasApp());
@@ -60,7 +61,8 @@ class KlasApp extends StatelessWidget {
         '/cart': (context) => const KlasCartScreen(),
         '/login': (context)=> const LoginScreen(),
         '/signup':(context)=>const SignupScreen(),
-      },
+        '/signup-form':(context)=>const SignupFormScreen(),
+      }, 
     );
   }
 }

@@ -29,26 +29,26 @@ class _CleanLuxurySplashState extends State<CleanLuxurySplash>
 
   void _initializeAnimations() {
     _zoomController = AnimationController(
-      duration: const Duration(milliseconds: 2000),
-      vsync: this,
-    );
-
-    _fadeController = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
 
+    _fadeController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+
     _taglineController = AnimationController(
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
 
     _zoomAnimation = Tween<double>(
       begin: 1.2,
-      end: 0.8,
+      end: 1.0,
     ).animate(CurvedAnimation(
       parent: _zoomController,
-      curve: Curves.easeInOut,
+      curve: Curves.easeOut,
     ));
 
     _fadeAnimation = Tween<double>(
@@ -69,8 +69,11 @@ class _CleanLuxurySplashState extends State<CleanLuxurySplash>
   }
 
   void _startAnimations() {
+    // Start logo animations immediately
     _fadeController.forward();
     _zoomController.forward();
+    
+    // Start "Elegant Finds" after 1.5 seconds for slow appearance
     Future.delayed(const Duration(milliseconds: 1500), () {
       if (mounted) {
         _taglineController.forward();
@@ -174,12 +177,24 @@ class _CleanLuxurySplashState extends State<CleanLuxurySplash>
       builder: (context, child) {
         return FadeTransition(
           opacity: _taglineAnimation,
-          child: Text(
-            'Elegant Finds',
-            style: GoogleFonts.playfairDisplay(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFF4B2E2B),
+          child: SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0, 0.3),
+              end: Offset.zero,
+            ).animate(CurvedAnimation(
+              parent: _taglineController,
+              curve: Curves.easeOutCubic,
+            )),
+            child: Text(
+              'Elegant Finds',
+              style: GoogleFonts.playfairDisplay(
+                fontSize: 28,
+                fontWeight: FontWeight.w300,
+                color: const Color(0xFF4B2E2B),
+                letterSpacing: 3,
+                height: 1.2,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
         );
