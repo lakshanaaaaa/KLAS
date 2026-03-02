@@ -6,6 +6,7 @@ import '../../widgets/profile_switcher.dart';
 import '../../models/profile_model.dart';
 import '../../services/profile_storage_service.dart';
 import '../../services/recommendation_engine.dart';
+import '../../services/auth_service.dart';
 import 'add_profile_screen.dart';
 
 class KlasProfileScreen extends StatefulWidget {
@@ -681,9 +682,13 @@ class _KlasProfileScreenState extends State<KlasProfileScreen>
             ),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pop(context);
-              // TODO: Implement logout logic
+              // Implement logout logic
+              await AuthService.logout();
+              if (mounted) {
+                Navigator.pushReplacementNamed(context, '/login');
+              }
             },
             child: Text(
               'Logout',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_colors.dart';
+import '../../services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -72,6 +73,9 @@ class _LoginScreenState extends State<LoginScreen>
 
     // Simulate login process
     await Future.delayed(const Duration(seconds: 2));
+    
+    // Set login state
+    await AuthService.setLogin(true);
 
     setState(() {
       _isLoading = false;

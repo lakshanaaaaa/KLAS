@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../../constants/app_colors.dart';
+import '../constants/app_colors.dart';
 
 class GlassNavBar extends StatelessWidget {
   final int currentIndex;
@@ -14,43 +14,39 @@ class GlassNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 20,
-      left: 20,
-      right: 20,
-      child: Container(
-        height: 70,
-        decoration: BoxDecoration(
-          color: AppColors.warmCreme.withOpacity(0.85),
-          borderRadius: BorderRadius.circular(35),
-          border: Border.all(
-            color: AppColors.coffeeBrown.withOpacity(0.2),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.deepMocha.withOpacity(0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
-            ),
-          ],
+    return Container(
+      height: 70,
+      margin: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: AppColors.warmCreme.withOpacity(0.85),
+        borderRadius: BorderRadius.circular(35),
+        border: Border.all(
+          color: AppColors.coffeeBrown.withOpacity(0.2),
+          width: 1,
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(35),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildNavItem(Icons.home_outlined, 0, 'Home'),
-                  _buildNavItem(Icons.category_outlined, 1, 'Categories'),
-                  _buildNavItem(Icons.favorite_border_outlined, 2, 'Wishlist'),
-                  _buildNavItem(Icons.shopping_cart_outlined, 3, 'Cart'),
-                  _buildNavItem(Icons.shopping_bag_outlined, 4, 'Orders'),
-                ],
-              ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.deepMocha.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(35),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildNavItem(context, Icons.home_outlined, 0, 'Home', '/home'),
+                _buildNavItem(context, Icons.category_outlined, 1, 'Categories', '/categories'),
+                _buildNavItem(context, Icons.favorite_border_outlined, 2, 'Wishlist', '/wishlist'),
+                _buildNavItem(context, Icons.shopping_cart_outlined, 3, 'Cart', '/cart'),
+                _buildNavItem(context, Icons.shopping_bag_outlined, 4, 'Orders', '/orders'),
+              ],
             ),
           ),
         ),
@@ -58,11 +54,16 @@ class GlassNavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(IconData icon, int index, String label) {
+  Widget _buildNavItem(BuildContext context, IconData icon, int index, String label, String route) {
     final isActive = currentIndex == index;
     
     return GestureDetector(
-      onTap: () => onTap(index),
+      onTap: () {
+        onTap(index);
+        if (!isActive) {
+          Navigator.pushReplacementNamed(context, route);
+        }
+      },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

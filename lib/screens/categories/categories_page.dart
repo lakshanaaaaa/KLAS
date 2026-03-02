@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_colors.dart';
 import '../../models/category_model.dart';
 import '../../widgets/category_card.dart';
+import '../../widgets/glass_nav_bar.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
@@ -21,6 +22,7 @@ class _CategoriesPageState extends State<CategoriesPage>
   
   CategoryType _selectedCategory = CategoryType.clothing;
   final List<CategorySection> _sections = SampleCategories.getAllSections();
+  int _currentIndex = 1;
 
   @override
   void initState() {
@@ -155,6 +157,14 @@ class _CategoriesPageState extends State<CategoriesPage>
           ),
         ],
       ),
+      bottomNavigationBar: GlassNavBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 
@@ -244,7 +254,7 @@ class _CategoriesPageState extends State<CategoriesPage>
           pinned: true,
           floating: true,
           leading: IconButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
             icon: Icon(
               Icons.arrow_back_ios,
               color: AppColors.coffeeBrown,

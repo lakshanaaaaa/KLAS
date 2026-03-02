@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../constants/app_colors.dart';
+import '../../../services/auth_service.dart';
 import 'validators.dart';
 
 class SignupForm extends StatefulWidget {
@@ -616,10 +617,13 @@ class _SignupFormState extends State<SignupForm> {
     }
   }
 
-  void _handleSignup() {
+  void _handleSignup() async {
     if (_formKey.currentState?.validate() == true) {
       // Handle signup logic
-      Navigator.pushReplacementNamed(context, '/home');
+      await AuthService.setLogin(true);
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, '/home');
+      }
     }
   }
 }

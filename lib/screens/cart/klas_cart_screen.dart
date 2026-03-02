@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_colors.dart';
+import '../../widgets/glass_nav_bar.dart';
 
 class KlasCartScreen extends StatefulWidget {
   const KlasCartScreen({super.key});
@@ -13,6 +14,7 @@ class _KlasCartScreenState extends State<KlasCartScreen>
     with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late Animation<double> _fadeAnimation;
+  int _currentIndex = 3;
 
   @override
   void initState() {
@@ -58,7 +60,7 @@ class _KlasCartScreenState extends State<KlasCartScreen>
         ),
         centerTitle: true,
         leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
+          onTap: () => Navigator.pushReplacementNamed(context, '/home'),
           child: Icon(
             Icons.arrow_back,
             color: AppColors.coffeeBrown,
@@ -127,6 +129,14 @@ class _KlasCartScreenState extends State<KlasCartScreen>
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: GlassNavBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
     );
   }

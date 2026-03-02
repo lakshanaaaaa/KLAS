@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_colors.dart';
+import '../../widgets/glass_nav_bar.dart';
 
 class KlasWishlistScreen extends StatefulWidget {
   const KlasWishlistScreen({super.key});
@@ -16,6 +17,7 @@ class _KlasWishlistScreenState extends State<KlasWishlistScreen>
   final TextEditingController _searchController = TextEditingController();
   String _selectedFilter = 'All';
   bool _isGridView = true;
+  int _currentIndex = 2;
 
   @override
   void initState() {
@@ -59,10 +61,18 @@ class _KlasWishlistScreenState extends State<KlasWishlistScreen>
           ],
         ),
       ),
+      bottomNavigationBar: GlassNavBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+      PreferredSizeWidget _buildAppBar() {
     return AppBar(
       backgroundColor: AppColors.warmCreme,
       elevation: 0,
@@ -78,7 +88,7 @@ class _KlasWishlistScreenState extends State<KlasWishlistScreen>
       ),
       centerTitle: true,
       leading: GestureDetector(
-        onTap: () => Navigator.pop(context),
+        onTap: () => Navigator.pushReplacementNamed(context, '/home'),
         child: Icon(
           Icons.arrow_back,
           color: AppColors.coffeeBrown,
