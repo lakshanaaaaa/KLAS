@@ -11,7 +11,7 @@ import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup_screen.dart';
 import 'screens/auth/signup_form_screen.dart';
 import 'screens/profile/add_profile_screen.dart';
-import 'screens/categories/women_categories_screen.dart';
+import 'screens/categories/categories_page.dart';
 
 void main() {
   runApp(const KlasApp());
@@ -65,7 +65,7 @@ class KlasApp extends StatelessWidget {
         '/signup':(context)=>const SignupScreen(),
         '/signup-form':(context)=>const SignupFormScreen(),
         '/add-profile':(context)=>const AddProfileScreen(),
-        '/women-categories':(context)=>const WomenCategoriesScreen(),
+        '/categories':(context)=>const CategoriesPage(),
       }, 
     );
   }

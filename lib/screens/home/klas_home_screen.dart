@@ -59,154 +59,6 @@ class _KlasHomeScreenState extends State<KlasHomeScreen>
     super.dispose();
   }
 
-  void _onNavTap(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-    
-    switch (index) {
-      case 0:
-        // Already home
-        break;
-      case 1:
-        _showCategoryMenu();
-        break;
-      case 2:
-        Navigator.pushNamed(context, '/wishlist');
-        break;
-      case 3:
-        Navigator.pushNamed(context, '/cart');
-        break;
-      case 4:
-        Navigator.pushNamed(context, '/orders');
-        break;
-    }
-  }
-
-  void _showCategoryMenu() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(32),
-          ),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Header
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: AppColors.softBeige.withOpacity(0.3),
-                    width: 1,
-                  ),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Categories',
-                    style: GoogleFonts.playfairDisplay(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.coffeeBrown,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Icon(
-                      Icons.close,
-                      color: AppColors.coffeeBrown,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            
-            // Category List
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              child: Column(
-                children: [
-                  _buildCategoryItem('Dresses', Icons.checkroom),
-                  _buildCategoryItem('Tops', Icons.style),
-                  _buildCategoryItem('Bottoms', Icons.accessibility),
-                  _buildCategoryItem('Accessories', Icons.diamond),
-                  _buildCategoryItem('Shoes', Icons.work),
-                  _buildCategoryItem('Bags', Icons.shopping_bag),
-                  _buildCategoryItem('Jewelry', Icons.diamond_outlined),
-                  _buildCategoryItem('Sale', Icons.local_offer),
-                ],
-              ),
-            ),
-            
-            const SizedBox(height: 20),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCategoryItem(String label, IconData icon) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pop(context);
-        // Navigate to category page
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: AppColors.softBeige.withOpacity(0.3),
-              width: 1,
-            ),
-          ),
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: AppColors.coffeeBrown.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(
-                icon,
-                color: AppColors.coffeeBrown,
-                size: 20,
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Text(
-                label,
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.coffeeBrown,
-                ),
-              ),
-            ),
-            Icon(
-              Icons.arrow_forward_ios,
-              color: AppColors.coffeeBrown.withOpacity(0.4),
-              size: 16,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -239,11 +91,11 @@ class _KlasHomeScreenState extends State<KlasHomeScreen>
               children: [
                 // Category Menu on Left
                 GestureDetector(
-                  onTap: () => _showCategoryMenu(),
+                  onTap: () => Navigator.pushNamed(context, '/categories'),
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: AppColors.softBeige.withOpacity(0.5),
+                      color: AppColors.coffeeBrown.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
@@ -252,21 +104,16 @@ class _KlasHomeScreenState extends State<KlasHomeScreen>
                         Icon(
                           Icons.menu,
                           color: AppColors.coffeeBrown,
-                          size: 18,
+                          size: 20,
                         ),
-                        const SizedBox(width: 6),
+                        const SizedBox(width: 8),
                         Text(
                           'Categories',
                           style: GoogleFonts.poppins(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
                             color: AppColors.coffeeBrown,
                           ),
-                        ),
-                        Icon(
-                          Icons.keyboard_arrow_down,
-                          color: AppColors.coffeeBrown,
-                          size: 16,
                         ),
                       ],
                     ),
@@ -405,21 +252,13 @@ class _KlasHomeScreenState extends State<KlasHomeScreen>
                               decoration: BoxDecoration(
                                 color: AppColors.white,
                                 borderRadius: BorderRadius.circular(24),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.deepMocha.withOpacity(0.2),
-                                    blurRadius: 12,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
                               ),
                               child: Text(
                                 'Shop Now',
                                 style: GoogleFonts.poppins(
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.coffeeBrown,
-                                  letterSpacing: 0.5,
                                 ),
                               ),
                             ),
@@ -474,102 +313,146 @@ class _KlasHomeScreenState extends State<KlasHomeScreen>
       // Glass Navigation Bar
       bottomNavigationBar: GlassNavBar(
         currentIndex: _currentIndex,
-        onTap: _onNavTap,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
     );
   }
 
   Widget _buildProductCard(int index) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadowColor,
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Product Image
-          Expanded(
-            flex: 3,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(24),
-                ),
-                color: AppColors.softBeige,
+    return FadeTransition(
+      opacity: _fadeAnimation,
+      child: SlideTransition(
+        position: _slideAnimation,
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.shadowColor,
+                blurRadius: 12,
+                offset: const Offset(0, 6),
               ),
-              child: Center(
-                child: Icon(
-                  Icons.checkroom,
-                  color: AppColors.coffeeBrown.withOpacity(0.5),
-                  size: 40,
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Product Image
+              Expanded(
+                flex: 3,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(24),
+                      topRight: Radius.circular(24),
+                    ),
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.coffeeBrown.withOpacity(0.1),
+                        AppColors.softBeige,
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.image,
+                      size: 40,
+                      color: AppColors.coffeeBrown.withOpacity(0.3),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          
-          // Product Details
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+              
+              // Product Info
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Elegant Dress',
+                        'Product ${index + 1}',
                         style: GoogleFonts.poppins(
-                          fontSize: 14,
+                          fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: AppColors.coffeeBrown,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        '\$${(index + 1) * 45}',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
+                        '\$${(index + 1) * 50}.00',
+                        style: GoogleFonts.playfairDisplay(
+                          fontSize: 18,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.deepMocha,
+                          color: AppColors.coffeeBrown,
                         ),
+                      ),
+                      const Spacer(),
+                      
+                      // Action Buttons
+                      Row(
+                        children: [
+                          // Wishlist Button
+                          GestureDetector(
+                            onTap: () {
+                              // Add to wishlist
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: AppColors.warmCreme,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Icon(
+                                Icons.favorite_border,
+                                size: 16,
+                                color: AppColors.coffeeBrown,
+                              ),
+                            ),
+                          ),
+                          
+                          const Spacer(),
+                          
+                          // Add to Cart Button
+                          GestureDetector(
+                            onTap: () {
+                              // Add to cart
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.coffeeBrown,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Icon(
+                                Icons.add_shopping_cart,
+                                size: 16,
+                                color: AppColors.warmCreme,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  
-                  // Wishlist Button
-                  GestureDetector(
-                    onTap: () {
-                      // Add to wishlist
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: AppColors.warmCreme,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(
-                        Icons.favorite_border,
-                        color: AppColors.coffeeBrown,
-                        size: 18,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
