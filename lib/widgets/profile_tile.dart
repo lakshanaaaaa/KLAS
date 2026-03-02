@@ -8,6 +8,7 @@ class ProfileTile extends StatelessWidget {
   final String? subtitle;
   final VoidCallback onTap;
   final Color? iconColor;
+  final bool isDestructive;
 
   const ProfileTile({
     super.key,
@@ -16,6 +17,7 @@ class ProfileTile extends StatelessWidget {
     this.subtitle,
     required this.onTap,
     this.iconColor,
+    this.isDestructive = false,
   });
 
   @override
@@ -43,12 +45,16 @@ class ProfileTile extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: (iconColor ?? AppColors.coffeeBrown).withOpacity(0.1),
+                color: isDestructive 
+                    ? Colors.red.withOpacity(0.1)
+                    : (iconColor ?? AppColors.coffeeBrown).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Icon(
                 icon,
-                color: iconColor ?? AppColors.coffeeBrown,
+                color: isDestructive 
+                    ? Colors.red
+                    : iconColor ?? AppColors.coffeeBrown,
                 size: 24,
               ),
             ),
@@ -65,7 +71,9 @@ class ProfileTile extends StatelessWidget {
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.coffeeBrown,
+                      color: isDestructive 
+                          ? Colors.red
+                          : AppColors.coffeeBrown,
                     ),
                   ),
                   if (subtitle != null) ...[
@@ -75,7 +83,9 @@ class ProfileTile extends StatelessWidget {
                       style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: AppColors.coffeeBrown.withOpacity(0.6),
+                        color: isDestructive
+                            ? Colors.red.withOpacity(0.7)
+                            : AppColors.coffeeBrown.withOpacity(0.7),
                       ),
                     ),
                   ],

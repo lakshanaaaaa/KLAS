@@ -433,85 +433,37 @@ class _KlasHomeScreenState extends State<KlasHomeScreen>
             ),
           ),
 
-          // Categories Section
+          // Featured Products Section
           SliverToBoxAdapter(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Shop by Category',
-                      style: GoogleFonts.playfairDisplay(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.coffeeBrown,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    
-                    // Category Grid
-                    GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: 4,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 16,
-                      childAspectRatio: 1,
-                      children: [
-                        _buildCategoryItem('Dresses', Icons.checkroom),
-                        _buildCategoryItem('Tops', Icons.style),
-                        _buildCategoryItem('Bottoms', Icons.accessibility),
-                        _buildCategoryItem('Accessories', Icons.diamond),
-                      ],
-                    ),
-                  ],
+            child: Column(
+              children: [
+                const SizedBox(height: 30),
+                Text(
+                  'Featured Products',
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.coffeeBrown,
+                  ),
                 ),
-              ),
-            ),
-          ),
-
-          const SliverToBoxAdapter(child: SizedBox(height: 30)),
-
-          // Featured Products
-          SliverToBoxAdapter(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Featured Products',
-                      style: GoogleFonts.playfairDisplay(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.coffeeBrown,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    
-                    // Product Grid
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                        childAspectRatio: 0.75,
-                      ),
-                      itemCount: 6,
-                      itemBuilder: (context, index) {
-                        return _buildProductCard(index);
-                      },
-                    ),
-                  ],
+                const SizedBox(height: 20),
+                
+                // Product Grid
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.75,
+                  ),
+                  itemCount: 6,
+                  itemBuilder: (context, index) {
+                    return _buildProductCard(index);
+                  },
                 ),
-              ),
+              ],
             ),
           ),
 
