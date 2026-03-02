@@ -225,7 +225,7 @@ class _KlasProfileScreenState extends State<KlasProfileScreen>
       body: FadeTransition(
         opacity: _fadeAnimation,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: Column(
             children: [
               // Profile Switcher Section
@@ -240,7 +240,7 @@ class _KlasProfileScreenState extends State<KlasProfileScreen>
               
               if (_isLoading)
                 const SizedBox(
-                  height: 100,
+                  height: 80,
                   child: Center(
                     child: CircularProgressIndicator(
                       color: AppColors.coffeeBrown,
@@ -248,28 +248,30 @@ class _KlasProfileScreenState extends State<KlasProfileScreen>
                   ),
                 ),
               
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
               
               // Active Profile Details
               if (_activeProfile != null && !_isLoading)
                 _buildActiveProfileDetails(),
               
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
               
               // Profile Actions
               if (_activeProfile != null && !_isLoading)
                 _buildProfileActions(),
               
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
               
               // Profile Statistics
               if (!_isLoading && _profiles.isNotEmpty)
                 _buildProfileStatistics(),
               
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
               
               // Menu Items
               _buildMenuItems(),
+              
+              const SizedBox(height: 20), // Reduced bottom padding
             ],
           ),
         ),
@@ -279,7 +281,7 @@ class _KlasProfileScreenState extends State<KlasProfileScreen>
 
   Widget _buildActiveProfileDetails() {
     return Container(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(32),
@@ -297,50 +299,38 @@ class _KlasProfileScreenState extends State<KlasProfileScreen>
           Hero(
             tag: 'profile-avatar-${_activeProfile!.id}',
             child: Container(
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               decoration: BoxDecoration(
                 color: AppColors.coffeeBrown.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(45),
                 border: Border.all(
                   color: AppColors.coffeeBrown.withOpacity(0.3),
                   width: 3,
                 ),
               ),
-              child: ClipOval(
-                child: _activeProfile!.avatarUrl != null && 
-                       _activeProfile!.avatarUrl!.isNotEmpty
-                    ? Image.network(
-                        _activeProfile!.avatarUrl!,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return _buildDefaultAvatar();
-                        },
-                      )
-                    : _buildDefaultAvatar(),
-              ),
+              child: _buildDefaultAvatar(),
             ),
           ),
           
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
           
           // Profile Name
           Text(
             _activeProfile!.name,
             style: GoogleFonts.playfairDisplay(
-              fontSize: 24,
+              fontSize: 22,
               fontWeight: FontWeight.w700,
               color: AppColors.coffeeBrown,
             ),
           ),
           
-          const SizedBox(height: 8),
+          const SizedBox(height: 4),
           
-          // Profile Info
           Text(
-            '${_activeProfile!.age} years • ${_activeProfile!.gender.displayName}',
+            _activeProfile!.email,
             style: GoogleFonts.poppins(
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.w400,
               color: AppColors.coffeeBrown.withOpacity(0.7),
             ),
@@ -350,7 +340,7 @@ class _KlasProfileScreenState extends State<KlasProfileScreen>
           
           // Size Info
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: AppColors.warmCreme,
               borderRadius: BorderRadius.circular(16),
@@ -371,7 +361,7 @@ class _KlasProfileScreenState extends State<KlasProfileScreen>
                   children: [
                     _buildSizeInfo('Top', _activeProfile!.topSize),
                     _buildSizeInfo('Bottom', _activeProfile!.bottomSize),
-                    _buildSizeInfo('Shoes', _activeProfile!.footwearSize),
+                    _buildSizeInfo('Shoes', _activeProfile!.shoeSize),
                   ],
                 ),
               ],

@@ -317,6 +317,25 @@ class _KlasHomeScreenState extends State<KlasHomeScreen>
           setState(() {
             _currentIndex = index;
           });
+          
+          // Navigate to respective pages
+          switch (index) {
+            case 0:
+              // Already on home page
+              break;
+            case 1:
+              Navigator.pushNamed(context, '/categories');
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/wishlist');
+              break;
+            case 3:
+              Navigator.pushNamed(context, '/cart');
+              break;
+            case 4:
+              Navigator.pushNamed(context, '/orders');
+              break;
+          }
         },
       ),
     );
